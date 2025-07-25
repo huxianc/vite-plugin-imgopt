@@ -9,7 +9,7 @@ export default defineConfig({
   clean: true,
   outExtension({ format }) {
     return {
-      js: format === 'esm' ? '.mjs' : '.js',
+      js: format === 'esm' ? '.mjs' : '.cjs',
     };
   },
 });
