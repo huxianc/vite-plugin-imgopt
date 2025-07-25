@@ -1,6 +1,5 @@
 import type { Plugin } from 'vite';
 import path from 'path';
-import sharp from 'sharp';
 import { ImageCompressOptions, CompressResult, ImageFormatOptions } from './types';
 import { shouldIncludeFile, isImageFile, formatBytes } from './utils';
 
@@ -15,6 +14,17 @@ const DEFAULT_OPTIONS: Required<Omit<ImageCompressOptions, 'include' | 'exclude'
   outputDir: '',
   verbose: false,
 };
+
+async function loadSharp() {
+  try {
+    const sharp = await import('sharp');
+    return sharp.default;
+  } catch (error) {
+    console.warn('⚠️  Sharp not available. Image compression will be skipped.');
+    console.warn('   To enable image compression, install sharp: npm install sharp');
+    return null;
+  }
+}
 
 export function imgOpt(options: ImageCompressOptions = {}): Plugin {
   const opts = { ...DEFAULT_OPTIONS, ...options };
@@ -34,8 +44,16 @@ export function imgOpt(options: ImageCompressOptions = {}): Plugin {
       }
     },
 
-    async generateBundle(outputOptions, bundle) {
+    async generateBundle(_outputOptions, bundle) {
       const results: CompressResult[] = [];
+      const sharp = await loadSharp();
+      
+      if (!sharp) {
+        if (opts.verbose) {
+          console.log('⏭️  Image compression skipped (sharp not available)');
+        }
+        return;
+      }
 
       if (opts.verbose) {
         console.log('\n🔍 Scanning for images in bundle...');
