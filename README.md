@@ -13,6 +13,12 @@
 ## 安装
 
 ```bash
+pnpm install -D vite-plugin-imgopt
+```
+
+或
+
+```bash
 npm install vite-plugin-imgopt --save-dev
 ```
 
@@ -155,7 +161,7 @@ export default {
 
 本插件基于以下优秀的开源项目：
 
-- [Sharp](https:// .pixelplumbing.com/) - 高性能图片处理库
+- [Sharp](https://github.com/lovell/sharp) - 高性能图片处理库
 - [minimatch](https://github.com/isaacs/minimatch) - 文件路径匹配
 
 ## 许可证
