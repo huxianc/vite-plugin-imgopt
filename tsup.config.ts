@@ -7,6 +7,7 @@ export default defineConfig({
   splitting: false,
   sourcemap: true,
   clean: true,
+  external: ['sharp'],
   outExtension({ format }) {
     return {
       js: format === 'esm' ? '.mjs' : '.cjs',
