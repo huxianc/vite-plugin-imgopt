@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-imgopt",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A Vite plugin for image compression with customizable settings",
   "type": "module",
   "main": "./dist/index.js",

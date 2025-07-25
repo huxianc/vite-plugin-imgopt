@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
-import imgOpt from '../src/index';
+import imgOpt from '../dist/index.mjs';
 
 export default defineConfig({
   // 开发服务器配置
